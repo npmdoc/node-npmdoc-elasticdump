@@ -63,6 +63,15 @@
 
         <li>
 
+            <a class="apidocElementLiA" href="#apidoc.element.elasticdump.elasticdump">
+            function <span class="apidocSignatureSpan"></span>elasticdump
+            <span class="apidocSignatureSpan">(input, output, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
             <a class="apidocElementLiA" href="#apidoc.element.elasticdump.super_">
             function <span class="apidocSignatureSpan">elasticdump.</span>super_
             <span class="apidocSignatureSpan">()</span>
@@ -95,6 +104,83 @@
 
 <div class="apidocSectionDiv">
 <h1><a href="#apidoc.module.elasticdump" id="apidoc.module.elasticdump">module elasticdump</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.elasticdump.elasticdump" id="apidoc.element.elasticdump.elasticdump">
+        function <span class="apidocSignatureSpan"></span>elasticdump
+        <span class="apidocSignatureSpan">(input, output, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">elasticdump = function (input, output, options) {
+  var self = this
+
+  self.input = input
+  self.output = output
+  self.options = options
+
+  if (self.options.toLog === null || self.options.toLog === undefined) {
+    self.options.toLog = true
+  }
+
+  self.validationErrors = self.validateOptions()
+
+  if (options.maxSockets) {
+    self.log(&#x27;globally setting maxSockets=&#x27; + options.maxSockets)
+    http.globalAgent.maxSockets = options.maxSockets
+    https.globalAgent.maxSockets = options.maxSockets
+  }
+
+  var InputProto
+  if (self.options.input &#x26;&#x26; !self.options.inputTransport) {
+    if (isUrl(self.options.input)) {
+      self.inputType = &#x27;elasticsearch&#x27;
+      if (self.options.httpAuthFile) {
+        self.options.input = addAuth(self.options.input, self.options.httpAuthFile)
+      }
+    } else {
+      self.inputType = &#x27;file&#x27;
+    }
+
+    InputProto = require(path.join(__dirname, &#x27;lib&#x27;, &#x27;transports&#x27;, self.inputType))[self.inputType]
+    self.input = (new InputProto(self, self.options.input, self.options[&#x27;input-index&#x27;]))
+  } else if (self.options.inputTransport) {
+    self.inputType = String(self.options.inputTransport)
+    InputProto = require(self.options.inputTransport)
+    var inputProtoKeys = Object.keys(InputProto)
+    self.input = (new InputProto[inputProtoKeys[0]](self, self.options.input, self.options[&#x27;input-index&#x27;]))
+  }
+
+  var OutputProto
+  if (self.options.output &#x26;&#x26; !self.options.outputTransport) {
+    if (isUrl(self.options.output)) {
+      self.outputType = &#x27;elasticsearch&#x27;
+      if (self.options.httpAuthFile) {
+        self.options.output = addAuth(self.options.output, self.options.httpAuthFile)
+      }
+    } else {
+      self.outputType = &#x27;file&#x27;
+      if (self.options.output === &#x27;$&#x27;) { self.options.toLog = false }
+    }
+
+    OutputProto = require(path.join(__dirname, &#x27;lib&#x27;, &#x27;transports&#x27;, self.outputType))[self.outputType]
+    self.output = (new OutputProto(self, self.options.output, self.options[&#x27;output-index&#x27;]))
+  } else if (self.options.outputTransport) {
+    self.outputType = String(self.options.outputTransport)
+    OutputProto = require(self.options.outputTransport)
+    var outputProtoKeys = Object.keys(OutputProto)
+    self.output = (new OutputProto[outputProtoKeys[0]](self, self.options.output, self.options[&#x27;output-index&#x27;]))
+  }
+
+  if (self.options.type === &#x27;data&#x27; &#x26;&#x26; self.options.transform) {
+    var modificationScriptText = &#x27;(function(doc) { &#x27; + self.options.transform + &#x27; })&#x27;
+    self.modifier = new vm.Script(modificationScriptText).runInNewContext()
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
 
 
     <h2>
