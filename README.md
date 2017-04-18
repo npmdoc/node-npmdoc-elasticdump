@@ -1,9 +1,14 @@
-# api documentation for  [elasticdump (v3.1.0)](https://github.com/taskrabbit/elasticsearch-dump#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-elasticdump.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-elasticdump) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-elasticdump.svg)](https://travis-ci.org/npmdoc/node-npmdoc-elasticdump)
+# npmdoc-elasticdump
+
+#### api documentation for  [elasticdump (v3.1.0)](https://github.com/taskrabbit/elasticsearch-dump#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-elasticdump.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-elasticdump) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-elasticdump.svg)](https://travis-ci.org/npmdoc/node-npmdoc-elasticdump)
+
 #### import and export tools for elasticsearch
 
-[![NPM](https://nodei.co/npm/elasticdump.png?downloads=true)](https://www.npmjs.com/package/elasticdump)
+[![NPM](https://nodei.co/npm/elasticdump.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/elasticdump)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-elasticdump/build/screenCapture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-elasticdump_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-elasticdump/build/apidoc.html)
+- [https://npmdoc.github.io/node-npmdoc-elasticdump/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-elasticdump/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-elasticdump/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-elasticdump/build/apidoc.html)
 
 ![npmPackageListing](https://npmdoc.github.io/node-npmdoc-elasticdump/build/screenCapture.npmPackageListing.svg)
 
@@ -17,8 +22,7 @@
 
 {
     "author": {
-        "name": "Evan Tahler",
-        "email": "evantahler@gmail.com"
+        "name": "Evan Tahler"
     },
     "bin": {
         "elasticdump": "./bin/elasticdump",
@@ -70,21 +74,17 @@
     "main": "elasticdump.js",
     "maintainers": [
         {
-            "name": "evantahler",
-            "email": "evantahler@gmail.com"
+            "name": "evantahler"
         },
         {
-            "name": "bleonard",
-            "email": "brian@bleonard.com"
+            "name": "bleonard"
         },
         {
-            "name": "davidjairala",
-            "email": "davidjairala@gmail.com"
+            "name": "davidjairala"
         }
     ],
     "name": "elasticdump",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git://github.com/taskrabbit/elasticsearch-dump.git"
@@ -105,72 +105,6 @@
     },
     "version": "3.1.0"
 }
-```
-
-
-
-# <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
-
-#### [module elasticdump](#apidoc.module.elasticdump)
-1.  [function <span class="apidocSignatureSpan">elasticdump.</span>super_ ()](#apidoc.element.elasticdump.super_)
-1.  object <span class="apidocSignatureSpan">elasticdump.</span>jsonparser
-
-#### [module elasticdump.jsonparser](#apidoc.module.elasticdump.jsonparser)
-1.  [function <span class="apidocSignatureSpan">elasticdump.jsonparser.</span>parse (str)](#apidoc.element.elasticdump.jsonparser.parse)
-
-
-
-# <a name="apidoc.module.elasticdump"></a>[module elasticdump](#apidoc.module.elasticdump)
-
-#### <a name="apidoc.element.elasticdump.super_"></a>[function <span class="apidocSignatureSpan">elasticdump.</span>super_ ()](#apidoc.element.elasticdump.super_)
-- description and source-code
-```javascript
-function EventEmitter() {
-  EventEmitter.init.call(this);
-}
-```
-- example usage
-```shell
-n/a
-```
-
-
-
-# <a name="apidoc.module.elasticdump.jsonparser"></a>[module elasticdump.jsonparser](#apidoc.module.elasticdump.jsonparser)
-
-#### <a name="apidoc.element.elasticdump.jsonparser.parse"></a>[function <span class="apidocSignatureSpan">elasticdump.jsonparser.</span>parse (str)](#apidoc.element.elasticdump.jsonparser.parse)
-- description and source-code
-```javascript
-parse = function (str) {
-  var result
-  try {
-    result = JSON.parse(str)
-  } catch (e) {
-    throw new Error('failed to parse json (message: "' + e.message + '") - source: ' + JSON.stringify(str))
-  }
-
-  return result
-}
-```
-- example usage
-```shell
-...
-var fs = require('fs')
-var ini = require('ini')
-var url = require('url')
-
-module.exports = addAuth
-
-function addAuth (urlToAddAuth, authFile) {
-var authConf = ini.parse(fs.readFileSync(authFile, 'utf-8'))
-if (authConf.user && authConf.password) {
-  var authString = authConf.user + ':' + authConf.password
-} else {
-  throw new Error('Malformed Auth File')
-}
-var urlObject = url.parse(urlToAddAuth)
-if (!urlObject.auth) {
-...
 ```
 
 
